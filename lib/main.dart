@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'resources/shapes_from_svg/main_gradient.dart';
-import 'widgets/buttons/entry_button.dart';
+import 'pages/home_page.dart';
+import 'pages/uncategorized/start_page.dart';
+import 'routes/app_router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,26 +17,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: (context, child) => MaterialApp(
-        home: CustomPaint(
-          size: Size(
-            1080.w,
-            1920.h,
-          ),
-          painter: CustomMainGradient(),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 1190.h,
-              ),
-              EntryButton(
-                onTap: () {},
-                title: 'Вхід',
-              ),
-            ],
-          ),
-        ),
+        title: 'Named Routes Demo',
+        initialRoute: '/',
+        onGenerateRoute: AppRouter.generateRoute,
+        routes: {
+          StartPage.routeName: (_) => const  StartPage(),
+          //'/home': (context) => const HomePage(),
+        },
       ),
       designSize: const Size(1080, 1920),
     );
   }
 }
+
+
