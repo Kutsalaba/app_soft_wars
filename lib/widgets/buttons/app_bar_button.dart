@@ -4,15 +4,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../resources/app_colors.dart';
 import '../uncategorized/splash_box.dart';
 
-class EntryButton extends StatelessWidget {
-  EntryButton({
+class AppBarButton extends StatelessWidget {
+  AppBarButton({
     Key? key,
     required this.title,
+    this.color = AppColors.infoButton,
     required this.onTap,
   }) : super(key: key);
 
   final String title;
-  final double radius = 40.0.w;
+  final Color color;
+  final double radius = 70.0.w;
   final void Function() onTap;
 
   @override
@@ -26,6 +28,7 @@ class EntryButton extends StatelessWidget {
           child: ShapeOfButton(
             title: title,
             radius: radius,
+            color: color,
           ),
         ),
         SplashBox(
@@ -40,12 +43,14 @@ class EntryButton extends StatelessWidget {
 class ShapeOfButton extends StatelessWidget {
   const ShapeOfButton({
     Key? key,
+    required this.color,
     required this.title,
     required this.radius,
   }) : super(key: key);
 
   final double radius;
   final String title;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +68,7 @@ class ShapeOfButton extends StatelessWidget {
             offset: Offset(0.w, 2.h),
           )
         ],
-        color: AppColors.buttons,
+        color: color,
         borderRadius: BorderRadius.circular(radius),
       ),
       alignment: Alignment.center,
@@ -90,8 +95,8 @@ class _Text extends StatelessWidget {
         decoration: TextDecoration.none,
         letterSpacing: 4.sp,
         fontFamily: 'SF UI Display',
-        fontSize: 70.sp,
-        fontWeight: FontWeight.w700,
+        fontSize: 50.sp,
+        fontWeight: FontWeight.w600,
         color: AppColors.text,
       ),
     );

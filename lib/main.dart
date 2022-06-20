@@ -1,7 +1,7 @@
-import 'package:app_soft_wars/pages/list_user_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'pages/home_page.dart';
 import 'pages/uncategorized/start_page.dart';
 import 'routes/app_router.dart';
 import 'utils/constants.dart';
@@ -22,8 +22,9 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         onGenerateRoute: AppRouter.generateRoute,
         routes: {
-          StartPage.routeName: (_) => const ListTaskScreen(),
-          //'/home': (context) => const HomePage(),
+          
+          StartPage.routeName: (_) => const StartPage(),
+          HomePage.routeName: (_) => const HomePage(),
         },
       ),
       designSize: const Size(
