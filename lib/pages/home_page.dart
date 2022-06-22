@@ -55,16 +55,21 @@ class _HomePageState extends State<HomePage> {
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
                           return Card(
-                            color: AppColors.infoButton,
+                            color: int.parse(snapshot.data![index].type) == 1
+                                ? AppColors.infoButton
+                                : AppColors.activeTile,
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(40.w)),
                             ),
                             child: SizedBox(
-                              width: 100.w,
+                              width: 600.w,
                               height: 170.h,
                               child: Row(
                                 children: [
+                                  SizedBox(
+                                    width: 20.w,
+                                  ),
                                   SvgPicture.asset(
                                     int.parse(snapshot.data![index].type) == 0
                                         ? 'assets/icons/work_outline_icon.svg'
@@ -73,31 +78,36 @@ class _HomePageState extends State<HomePage> {
                                     width: 100.0.w,
                                     allowDrawingOutsideViewBox: true,
                                   ),
-                                  Column(
-                                    children: [
-                                      _TitleText(
-                                        text: snapshot.data![index].name,
-                                      ),
-                                      _TitleText(
-                                        text: DateFormat('dd.MM.yyyy').format(
-                                            snapshot.data![index].syncTime),
-                                      )
-                                    ],
+                                  SizedBox(
+                                    width: 20.w,
+                                  ),
+                                  SizedBox(
+                                    width: 500.w,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        _TitleText(
+                                          text: snapshot.data![index].name,
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                            top: 40.h,
+                                          ),
+                                          child: _TitleDate(
+                                            text: DateFormat('dd.MM.yyyy')
+                                                .format(snapshot
+                                                    .data![index].syncTime),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                            // ListTile(
-                            //   title: Text('Name: ${snapshot.data![index].name}'),
-                            //   subtitle:
-                            //       Text('Status: ${snapshot.data![index].status}'),
-                            //   // leading: Container(
-                            //   //   width: 150.w,
-                            //   //   decoration: BoxDecoration(
-                            //   //     borderRadius: BorderRadius.circular(20.w),
-                            //   //   image: DecorationImage(image: NetworkImage(snapshot.data![index].))
-                            //   //   ),),
-                            // ),
                           );
                         },
                       );
@@ -123,17 +133,39 @@ class _TitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        text,
-        style: TextStyle(
-          decoration: TextDecoration.none,
-          letterSpacing: 2.sp,
-          fontFamily: 'SF UI Display',
-          fontSize: 40.sp,
-          fontWeight: FontWeight.w900,
-          color: AppColors.text,
-        ),
+    return Text(
+      text,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        letterSpacing: 2.sp,
+        fontFamily: 'SF UI Display',
+        fontSize: 55.sp,
+        fontWeight: FontWeight.w900,
+        color: AppColors.text,
+      ),
+    );
+  }
+}
+
+class _TitleDate extends StatelessWidget {
+  const _TitleDate({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        decoration: TextDecoration.none,
+        letterSpacing: 2.sp,
+        fontFamily: 'SF UI Display',
+        fontSize: 35.sp,
+        fontWeight: FontWeight.w900,
+        color: AppColors.text,
       ),
     );
   }
